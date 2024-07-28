@@ -194,12 +194,6 @@ async def start(client, message):
                     reply_markup=InlineKeyboardMarkup(button)
                 )
                 filesarr.append(msg)
-                k = await client.send_message(chat_id = message.from_user.id, text=f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie Files/Videos will be deleted in <b><u>10 mins</u> 🫥 <i></b>(Due to Copyright Issues)</i>.\n\n<b><i>Please forward this ALL Files/Videos to your Saved Messages and Start Download there</i></b>")
-                await asyncio.sleep(600)
-                for x in filesarr:
-                    await x.delete()
-                await k.edit_text("<b>Your All Files/Videos is successfully deleted!!!</b>")
-            
             except Exception as e:
                 logger.warning(e, exc_info=True)
                 continue
@@ -370,6 +364,10 @@ async def base_site_handler(client, m: Message):
         return await m.reply(text=text, disable_web_page_preview=True)
     elif len(cmd) == 2:
         base_site = cmd[1].strip()
+        if base_site == None:
+            await update_user_info(user_id, {"base_site": base_site})
+            return await m.reply("<b>Base Site updated successfully</b>")
+            
         if not domain(base_site):
             return await m.reply(text=text, disable_web_page_preview=True)
         await update_user_info(user_id, {"base_site": base_site})
