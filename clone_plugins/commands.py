@@ -26,6 +26,7 @@ mongo_client = MongoClient(MONGO_URL)
 mongo_db = mongo_client["cloned_vjbotz"]
 
 logger = logging.getLogger(__name__)
+filesarr = []
 
 # Don't Remove Credit Tg - @VJ_Botz
 # Subscribe YouTube Channel For Amazing Bot https://youtube.com/@Tech_VJ
@@ -102,12 +103,12 @@ async def start(client, message):
         if AUTO_DELETE_MODE == True:
             k = await msg.reply(f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File/Video will be deleted in <b><u>{AUTO_DELETE} mins</u> 🫥 <i></b>(Due to Copyright Issues)</i>.\n\n<b><i>Please forward this File/Video to your Saved Messages and Start Download there</i></b>",quote=True)
             await asyncio.sleep(AUTO_DELETE_TIME)
-            await msg.delete()
-            await k.edit_text("<b>Times up!! Your File/Video is successfully deleted!!!</b>")
-            return
+            try:
+            await x.delete()
         except:
             pass
-        return await message.reply('No such file exist.')
+        await k.edit_text("<b>Your All Files/Videos is successfully deleted!!!</b>")
+       
     files = files_[0]
     title = files.file_name
     size=get_size(files.file_size)
