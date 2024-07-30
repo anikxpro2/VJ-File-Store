@@ -101,13 +101,17 @@ async def start(client, message):
                     return
             await msg.edit_caption(f_caption)
         if AUTO_DELETE_MODE == True:
-            k = await msg.reply(f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File/Video will be deleted in <b><u>{AUTO_DELETE} mins</u> 🫥 <i></b>(Due to Copyright Issues)</i>.\n\n<b><i>Please forward this File/Video to your Saved Messages and Start Download there</i></b>",quote=True)
-            await asyncio.sleep(AUTO_DELETE_TIME)
-            try:
-            await x.delete()
-        except:
-            pass
-        await k.edit_text("<b>Your All Files/Videos is successfully deleted!!!</b>")
+    k = await msg.reply(
+        f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File/Video will be deleted in <b><u>{AUTO_DELETE} mins</u> 🫥 <i></b>(Due to Copyright Issues)</i>.\n\n<b><i>Please forward this File/Video to your Saved Messages and Start Download there</i></b>",
+        quote=True
+    )
+    await asyncio.sleep(AUTO_DELETE_TIME)
+    try:
+        await x.delete()
+    except:
+        pass
+    await k.edit_text("<b>Your All Files/Videos is successfully deleted!!!</b>")
+
        
     files = files_[0]
     title = files.file_name
